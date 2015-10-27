@@ -10,41 +10,46 @@
 
 @implementation WCGraintCircleLayer
 -(instancetype)initGraintCircleWithBounds:(CGRect)bounds Position:(CGPoint)position FromColor:(UIColor *)fromColor ToColor:(UIColor *)toColor LineWidth:(CGFloat) linewidth{
-    if (self = [super init]) {
-        self.bounds = bounds;
-        self.position = position;
-        NSArray * colors = [self graintFromColor:fromColor ToColor:toColor Count:4.0];
-        for (int i = 0; i < colors.count -1; i++) {
-            CAGradientLayer * graint = [CAGradientLayer layer];
-            graint.bounds = CGRectMake(0,0,CGRectGetWidth(bounds)/2,CGRectGetHeight(bounds)/2);
-            NSValue * valuePoint = [[self positionArrayWithMainBounds:self.bounds] objectAtIndex:i];
-            graint.position = valuePoint.CGPointValue;
-            UIColor * fromColor = colors[i];
-            UIColor * toColor = colors[i+1];
-            NSArray *colors = [NSArray arrayWithObjects:(id)fromColor.CGColor, toColor.CGColor, nil];
-            NSNumber *stopOne = [NSNumber numberWithFloat:0.0];
-            NSNumber *stopTwo = [NSNumber numberWithFloat:1.0];
-            NSArray *locations = [NSArray arrayWithObjects:stopOne, stopTwo, nil];
-            graint.colors = colors;
-            graint.locations = locations;
-            graint.startPoint = ((NSValue *)[[self startPoints] objectAtIndex:i]).CGPointValue;
-            graint.endPoint = ((NSValue *)[[self endPoints] objectAtIndex:i]).CGPointValue;
-            [self addSublayer:graint];
-            //Set mask
-            CAShapeLayer * shapelayer = [CAShapeLayer layer];
-            CGRect rect = CGRectMake(0,0,CGRectGetWidth(self.bounds) - 2 * linewidth, CGRectGetHeight(self.bounds) - 2 * linewidth);
-            shapelayer.bounds = rect;
-            shapelayer.position = CGPointMake(CGRectGetWidth(self.bounds)/2, CGRectGetHeight(self.bounds)/2);
-            shapelayer.strokeColor = [UIColor blueColor].CGColor;
-            shapelayer.fillColor = [UIColor clearColor].CGColor;
-            shapelayer.path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:CGRectGetWidth(rect)/2].CGPath;
-            shapelayer.lineWidth = linewidth;
-            shapelayer.lineCap = kCALineCapRound;
-            shapelayer.strokeStart = 0.015;
-            shapelayer.strokeEnd = 0.985;
-            [self setMask:shapelayer];
-        }
+    self = [super init];
+    if (!self) {
+        return nil;
     }
+
+    self.bounds = bounds;
+    self.position = position;
+    NSArray * colors = [self graintFromColor:fromColor ToColor:toColor Count:4.0];
+    for (int i = 0; i < colors.count -1; i++) {
+        CAGradientLayer * graint = [CAGradientLayer layer];
+        graint.bounds = CGRectMake(0,0,CGRectGetWidth(bounds)/2,CGRectGetHeight(bounds)/2);
+        NSValue * valuePoint = [[self positionArrayWithMainBounds:self.bounds] objectAtIndex:i];
+        graint.position = valuePoint.CGPointValue;
+        UIColor * fromColor = colors[i];
+        UIColor * toColor = colors[i+1];
+        NSArray *colors = [NSArray arrayWithObjects:(id)fromColor.CGColor, toColor.CGColor, nil];
+        NSNumber *stopOne = [NSNumber numberWithFloat:0.0];
+        NSNumber *stopTwo = [NSNumber numberWithFloat:1.0];
+        NSArray *locations = [NSArray arrayWithObjects:stopOne, stopTwo, nil];
+        graint.colors = colors;
+        graint.locations = locations;
+        graint.startPoint = ((NSValue *)[[self startPoints] objectAtIndex:i]).CGPointValue;
+        graint.endPoint = ((NSValue *)[[self endPoints] objectAtIndex:i]).CGPointValue;
+        [self addSublayer:graint];
+    }
+    
+    //Set mask
+    CAShapeLayer * shapelayer = [CAShapeLayer layer];
+    CGRect rect = CGRectMake(0,0,CGRectGetWidth(self.bounds) - 2 * linewidth, CGRectGetHeight(self.bounds) - 2 * linewidth);
+    shapelayer.bounds = rect;
+    shapelayer.position = CGPointMake(CGRectGetWidth(self.bounds)/2, CGRectGetHeight(self.bounds)/2);
+    shapelayer.strokeColor = [UIColor blueColor].CGColor;
+    shapelayer.fillColor = [UIColor clearColor].CGColor;
+    shapelayer.path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:CGRectGetWidth(rect)/2].CGPath;
+    shapelayer.lineWidth = linewidth;
+    shapelayer.lineCap = kCALineCapRound;
+    shapelayer.strokeStart = 0.015;
+    shapelayer.strokeEnd = 0.985;
+    [self setMask:shapelayer];
+    
     return self;
 }
 -(NSArray *)positionArrayWithMainBounds:(CGRect)bounds{
