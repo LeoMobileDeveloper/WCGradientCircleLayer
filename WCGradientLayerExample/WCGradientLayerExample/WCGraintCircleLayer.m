@@ -47,6 +47,17 @@
     }
     return self;
 }
++(instancetype)layerWithWithBounds:(CGRect)bounds
+                          Position:(CGPoint)position
+                         FromColor:(UIColor *)fromColor
+                           ToColor:(UIColor *)toColor
+                         LineWidth:(CGFloat)linewidth{
+    WCGraintCircleLayer * layer = [[self alloc] initGraintCircleWithBounds:bounds
+                                                                  Position:position
+                                                                 FromColor:fromColor
+                                                                   ToColor:toColor
+                                                                 LineWidth:linewidth];
+}
 -(NSArray *)positionArrayWithMainBounds:(CGRect)bounds{
     CGPoint first = CGPointMake(CGRectGetWidth(bounds)/4 *3, CGRectGetHeight(bounds)/4 *1);
     CGPoint second = CGPointMake(CGRectGetWidth(bounds)/4 *3, CGRectGetHeight(bounds)/4 *3);

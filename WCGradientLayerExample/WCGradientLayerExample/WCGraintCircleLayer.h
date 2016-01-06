@@ -9,5 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface WCGraintCircleLayer : CALayer
--(instancetype)initGraintCircleWithBounds:(CGRect)bounds Position:(CGPoint)position FromColor:(UIColor *)fromColor ToColor:(UIColor *)toColor LineWidth:(CGFloat) linewidth;
+-(instancetype)initGraintCircleWithBounds:(CGRect)bounds
+                                 Position:(CGPoint)position
+                                FromColor:(UIColor *)fromColor
+                                  ToColor:(UIColor *)toColor
+                                LineWidth:(CGFloat) linewidth;
++(instancetype)layerWithWithBounds:(CGRect)bounds
+                          Position:(CGPoint)position
+                         FromColor:(UIColor *)fromColor
+                           ToColor:(UIColor *)toColor
+                         LineWidth:(CGFloat) linewidth;
 @end
