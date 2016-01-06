@@ -57,6 +57,7 @@
                                                                  FromColor:fromColor
                                                                    ToColor:toColor
                                                                  LineWidth:linewidth];
+    return layer;
 }
 -(NSArray *)positionArrayWithMainBounds:(CGRect)bounds{
     CGPoint first = CGPointMake(CGRectGetWidth(bounds)/4 *3, CGRectGetHeight(bounds)/4 *1);
@@ -94,12 +95,6 @@
         UIColor * onecolor = [UIColor colorWithRed:oneR green:oneG blue:oneB alpha:oneAlpha];
         [result addObject:onecolor];
     }
-    //    [result addObject:[self midColorWithFromColor:fromColor ToColor:toColor Progress:0.0]];
-    //    [result addObject:[self midColorWithFromColor:fromColor ToColor:toColor Progress:0.2]];
-    //    [result addObject:[self midColorWithFromColor:fromColor ToColor:toColor Progress:0.4]];
-    //    [result addObject:[self midColorWithFromColor:fromColor ToColor:toColor Progress:0.6]];
-    //    [result addObject:[self midColorWithFromColor:fromColor ToColor:toColor Progress:1.0]];
-    
     return result;
 }
 -(UIColor *)midColorWithFromColor:(UIColor *)fromColor ToColor:(UIColor*)toColor Progress:(CGFloat)progress{
